@@ -1,0 +1,18 @@
+expression CaminhoCSV = "C:\Users\Isadora Veiga\Downloads\imdb_dashboard\imdb_dashboard\data\clean\imdb_filmes_limpos_powerbi.csv" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: cfdc32a6-ea2d-4edf-a299-df0c748ab956
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navegação
+
+expression fonte_csv =
+		let
+			Fonte = Csv.Document(File.Contents(CaminhoCSV), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+			Promovido = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+			Renomeado = Table.RenameColumns(Promovido, {{Table.ColumnNames(Promovido){0}, "id"}})
+		in
+			Renomeado
+	lineageTag: 0a510e05-17da-4038-9784-2875efb9e7f3
+
+	annotation PBI_ResultType = Table
+

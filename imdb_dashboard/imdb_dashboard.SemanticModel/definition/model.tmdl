@@ -1,0 +1,21 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["CaminhoCSV","fonte_csv","filmes","generos"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table filmes
+ref table generos
+ref table DateTableTemplate_4c766a9e-2731-4fe3-b878-de3fa65469a9
+ref table LocalDateTable_1d98fe7a-4bf0-495f-83fa-a2c2c085a108
+
+ref cultureInfo pt-BR
+

@@ -1,0 +1,298 @@
+table filmes
+	lineageTag: fe9004ec-6841-40d6-9a98-9386dacf7d0f
+
+	measure 'Total de filmes' = COUNTROWS(filmes)
+		formatString: #,0
+		lineageTag: 9a7f68f5-ac92-43c0-a610-4bdd313fab6e
+
+	measure 'Filmes com nota' = CALCULATE(COUNTROWS(filmes), filmes[classificacao_score] <> "Sem nota")
+		formatString: #,0
+		lineageTag: c97ea7ab-4fa4-46ec-8d0d-1985b41945c8
+
+	measure 'Filmes sem nota' = CALCULATE(COUNTROWS(filmes), filmes[classificacao_score] = "Sem nota")
+		formatString: #,0
+		lineageTag: 4d65332e-ee90-41ab-ab42-27f0eb9fad24
+
+	measure 'Nota média' = AVERAGE(filmes[score])
+		formatString: 0.0
+		lineageTag: 140ddb3b-a126-4e1f-994f-bd79cb195896
+
+	measure 'Filmes bem avaliados' = CALCULATE(COUNTROWS(filmes), filmes[classificacao_score] = "Bem avaliado")
+		formatString: #,0
+		lineageTag: 9023968e-df9c-4e5b-8636-411a928bdae9
+
+	measure 'Taxa bem avaliados' = DIVIDE([Filmes bem avaliados], [Filmes com nota])
+		formatString: 0.0%
+		lineageTag: 9d3ccaaa-64fb-471c-9383-834fb75c3e51
+
+	measure 'Taxa bem avaliados por idioma' = IF([Total de filmes] >= 100, [Taxa bem avaliados])
+		formatString: 0.0%
+		lineageTag: 415f7a0f-c346-4659-ab17-de13a8a18b1a
+
+	measure 'Taxa bem avaliados por pais' = IF(SELECTEDVALUE(filmes[pais_analise]) <> "Indefinido" && [Total de filmes] >= 30, [Taxa bem avaliados])
+		formatString: 0.0%
+		lineageTag: c28b8740-c002-4188-81ee-8bf62b210599
+
+	measure 'Receita total' = SUM(filmes[receita_analise])
+		formatString: #,0,,
+		lineageTag: 2ec7a9c1-e6b0-46dd-8e66-73214195e7e8
+
+	measure 'Orçamento total' = SUM(filmes[orcamento_analise])
+		formatString: #,0,,
+		lineageTag: dfc2aa64-9205-44d0-a975-d653c3f6418f
+
+	measure 'Filmes com financeiro confiável' = CALCULATE(COUNTROWS(filmes), filmes[financeiro_confiavel] = "Sim")
+		formatString: #,0
+		lineageTag: 1bb8322d-82f0-47c6-a1b5-88715233f052
+
+	measure 'ROI mediano' = MEDIAN(filmes[roi])
+		formatString: 0.0
+		lineageTag: a5a4f38f-4f60-432d-a015-13987d0e52db
+
+	measure 'Orçamentos suspeitos' = CALCULATE(COUNTROWS(filmes), filmes[orcamento_suspeito] = "Sim")
+		formatString: #,0
+		lineageTag: 2e836bfa-749d-46d3-b504-e601f52c2972
+
+	measure 'Nota média orçamento alto' = CALCULATE([Nota média], filmes[faixa_orcamento] IN {"100 a 200 milhões", "Acima de 200 milhões"})
+		formatString: 0.0
+		lineageTag: ee558284-e115-4700-a929-0515be9fa96a
+
+	measure 'Nota média orçamento baixo' = CALCULATE([Nota média], filmes[faixa_orcamento] = "Até 10 milhões")
+		formatString: 0.0
+		lineageTag: 664d7445-25f0-4338-99a1-5f905ba908ff
+
+	measure 'Insight avaliação' = FORMAT([Taxa bem avaliados], "0.0%") & " dos filmes com nota chegam a 80 ou mais. A nota média do público é " & FORMAT([Nota média], "0.0") & " de 100."
+		lineageTag: 6b6ac6d3-0acb-4a7c-964b-bbd09448dd9a
+
+	measure 'Insight bem avaliados' = FORMAT([Filmes bem avaliados], "#,0") & " de " & FORMAT([Filmes com nota], "#,0") & " filmes com nota chegam a 80 ou mais. Idiomas com menos de 100 filmes e países com menos de 30 ficam fora dos percentuais para evitar distorção."
+		lineageTag: 2f7b4408-f784-4e0a-814c-2af9f44d35ba
+
+	measure 'Insight comercial' = "Entre os " & FORMAT([Filmes com financeiro confiável], "#,0") & " filmes com orçamento e receita confiáveis, o ROI mediano é " & FORMAT([ROI mediano], "0.0") & "x: a bilheteria típica é " & FORMAT([ROI mediano], "0.0") & " vezes o orçamento."
+		lineageTag: 08a9ddce-70f0-496d-9c46-a643675ea168
+
+	measure 'Insight orçamento' = "Filmes de orçamento alto (US$ 100 mi ou mais) têm nota média " & FORMAT([Nota média orçamento alto], "0.0") & ", contra " & FORMAT([Nota média orçamento baixo], "0.0") & " dos filmes de até US$ 10 mi."
+		lineageTag: 56f3dbed-157b-4e35-810e-9787d77b0df2
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: ba4b757d-a30c-4b47-9b5f-ba73c18fc5a4
+		summarizeBy: none
+		sourceColumn: id
+
+	column titulo
+		dataType: string
+		lineageTag: f8324450-d923-497e-ab98-8eb4b94753c2
+		summarizeBy: none
+		sourceColumn: titulo
+
+	column data_lancamento
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: e68d0d9f-89cb-437f-ba57-0b56aa8116f5
+		summarizeBy: none
+		sourceColumn: data_lancamento
+
+		variation Variation
+			isDefault
+			relationship: 406d6e81-9ce2-4bff-953d-1f747022754b
+			defaultHierarchy: LocalDateTable_1d98fe7a-4bf0-495f-83fa-a2c2c085a108.'Hierarquia de datas'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ff6aa1a-064f-46e3-981d-085e04778ade
+		summarizeBy: sum
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column decada
+		dataType: int64
+		formatString: 0
+		lineageTag: ed10a164-ff02-4046-86c3-20c20e6c0539
+		summarizeBy: sum
+		sourceColumn: decada
+
+		annotation SummarizationSetBy = Automatic
+
+	column score
+		dataType: double
+		formatString: 0.0
+		lineageTag: 97053423-a3d9-4b86-8ace-fdac9d7236ce
+		summarizeBy: sum
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	column faixa_score
+		dataType: string
+		lineageTag: 71196af6-1f9c-4f48-8101-e689e2d8f903
+		summarizeBy: none
+		sourceColumn: faixa_score
+		sortByColumn: ordem_faixa_score
+
+	column classificacao_score
+		dataType: string
+		lineageTag: 9b8f0aa4-488c-42d0-8e8f-d35dba45db43
+		summarizeBy: none
+		sourceColumn: classificacao_score
+
+	column genero
+		dataType: string
+		lineageTag: 4d81aaa9-0c58-41a2-a128-567dc2ad6c35
+		summarizeBy: none
+		sourceColumn: genero
+
+	column genero_principal
+		dataType: string
+		lineageTag: 1fbea0ac-54f2-4c2f-86a6-102cc10dad44
+		summarizeBy: none
+		sourceColumn: genero_principal
+
+	column status
+		dataType: string
+		lineageTag: 3d56a74b-b021-4ae4-bb65-4e79797db02c
+		summarizeBy: none
+		sourceColumn: status
+
+	column idioma_original
+		dataType: string
+		lineageTag: 0a7edb0b-c504-4d19-bf3d-787aa00c5dee
+		summarizeBy: none
+		sourceColumn: idioma_original
+
+	column pais
+		dataType: string
+		lineageTag: 12692948-2783-45cc-80ab-a2dfda1cf2c3
+		summarizeBy: none
+		sourceColumn: pais
+
+	column pais_analise
+		dataType: string
+		lineageTag: 875a27d5-43ea-4d93-b0cf-7aa9eab24b94
+		summarizeBy: none
+		sourceColumn: pais_analise
+
+	column orcamento
+		dataType: double
+		formatString: #,0,,
+		lineageTag: ecbf530d-97a8-4429-a3d2-a147730b4445
+		summarizeBy: sum
+		sourceColumn: orcamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column orcamento_suspeito
+		dataType: string
+		lineageTag: e8b59b25-db5b-4470-adba-90d61ae1a7d8
+		summarizeBy: none
+		sourceColumn: orcamento_suspeito
+
+	column orcamento_analise
+		dataType: double
+		formatString: #,0,,
+		lineageTag: ef2dca82-4f5b-45b4-a3c5-ed1b3a6e3901
+		summarizeBy: sum
+		sourceColumn: orcamento_analise
+
+		annotation SummarizationSetBy = Automatic
+
+	column faixa_orcamento
+		dataType: string
+		lineageTag: e49129cf-8e96-4202-ab9c-4322305eab02
+		summarizeBy: none
+		sourceColumn: faixa_orcamento
+		sortByColumn: ordem_faixa_orcamento
+
+	column receita
+		dataType: double
+		formatString: #,0,,
+		lineageTag: 549965d2-166b-449c-96ac-9e2fab8098e7
+		summarizeBy: sum
+		sourceColumn: receita
+
+		annotation SummarizationSetBy = Automatic
+
+	column receita_suspeita
+		dataType: string
+		lineageTag: a2bc0f3d-ac96-45b6-89aa-6e833b04dc7e
+		summarizeBy: none
+		sourceColumn: receita_suspeita
+
+	column receita_analise
+		dataType: double
+		formatString: #,0,,
+		lineageTag: 870cbf2e-d254-4cba-bbae-0912541df476
+		summarizeBy: sum
+		sourceColumn: receita_analise
+
+		annotation SummarizationSetBy = Automatic
+
+	column financeiro_conflitante
+		dataType: string
+		lineageTag: f7df7116-59b7-4d4a-ba01-0626ddad16d4
+		summarizeBy: none
+		sourceColumn: financeiro_conflitante
+
+	column financeiro_confiavel
+		dataType: string
+		lineageTag: 086a84a4-37d7-4498-9f41-9a6b73e8a8de
+		summarizeBy: none
+		sourceColumn: financeiro_confiavel
+
+	column lucro
+		dataType: double
+		formatString: #,0,,
+		lineageTag: 08e9da73-389d-46af-be06-9faac45744e8
+		summarizeBy: sum
+		sourceColumn: lucro
+
+		annotation SummarizationSetBy = Automatic
+
+	column roi
+		dataType: double
+		formatString: 0.0
+		lineageTag: a627de02-8954-4853-8f34-b8cfa54754c7
+		summarizeBy: sum
+		sourceColumn: roi
+
+		annotation SummarizationSetBy = Automatic
+
+	column titulo_ano = filmes[titulo] & " (" & filmes[ano] & ")"
+		dataType: string
+		lineageTag: 723e512f-cb91-4076-84bc-59ebc4078785
+		summarizeBy: none
+
+	column ordem_faixa_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 22fbc8a8-d7e1-4d11-b682-dc16cb964456
+		summarizeBy: sum
+		sourceColumn: ordem_faixa_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column ordem_faixa_orcamento
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d5b7531-a4f1-4479-b271-fb1b669d13a3
+		summarizeBy: sum
+		sourceColumn: ordem_faixa_orcamento
+
+		annotation SummarizationSetBy = Automatic
+
+	partition filmes = m
+		mode: import
+		source =
+				let
+					Fonte = fonte_csv,
+					Colunas = Table.SelectColumns(Fonte, {"id", "titulo", "data_lancamento", "ano", "decada", "score", "faixa_score", "classificacao_score", "genero", "genero_principal", "status", "idioma_original", "pais", "pais_analise", "orcamento", "orcamento_suspeito", "orcamento_analise", "faixa_orcamento", "receita", "receita_suspeita", "receita_analise", "financeiro_conflitante", "financeiro_confiavel", "lucro", "roi"}),
+					Tipos = Table.TransformColumnTypes(Colunas, {{"id", Int64.Type}, {"titulo", type text}, {"data_lancamento", type date}, {"ano", Int64.Type}, {"decada", Int64.Type}, {"score", type number}, {"faixa_score", type text}, {"classificacao_score", type text}, {"genero", type text}, {"genero_principal", type text}, {"status", type text}, {"idioma_original", type text}, {"pais", type text}, {"pais_analise", type text}, {"orcamento", type number}, {"orcamento_suspeito", type text}, {"orcamento_analise", type number}, {"faixa_orcamento", type text}, {"receita", type number}, {"receita_suspeita", type text}, {"receita_analise", type number}, {"financeiro_conflitante", type text}, {"financeiro_confiavel", type text}, {"lucro", type number}, {"roi", type number}}, "en-US"),
+					OrdemNota = Table.AddColumn(Tipos, "ordem_faixa_score", each let p = List.PositionOf({"Abaixo de 50", "50 a 59", "60 a 69", "70 a 79", "80 ou mais"}, [faixa_score]) in if p = -1 then 6 else p + 1, Int64.Type),
+					OrdemOrc = Table.AddColumn(OrdemNota, "ordem_faixa_orcamento", each let p = List.PositionOf({"Até 10 milhões", "10 a 50 milhões", "50 a 100 milhões", "100 a 200 milhões", "Acima de 200 milhões"}, [faixa_orcamento]) in if p = -1 then 6 else p + 1, Int64.Type)
+				in
+					OrdemOrc
+

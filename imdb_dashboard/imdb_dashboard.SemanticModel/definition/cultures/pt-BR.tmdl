@@ -1,0 +1,242 @@
+cultureInfo pt-BR
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "filmes.total_de_filmes": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "Total de filmes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Total de filmes": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "filmes.idioma_original": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "idioma_original"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Idioma": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "filmes.decada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "decada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Década": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "filmes.filmes_bem_avaliados": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "Filmes bem avaliados"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Filmes com nota ≥ 80": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "filmes.nota_média": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "Nota média"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Nota média do público": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "filmes.insight_avaliação": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "Insight avaliação"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Insight": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "filmes.insight_bem_avaliados": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "Insight bem avaliados"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Insight": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "filmes.insight_comercial": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "Insight comercial"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Insight": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "filmes.insight_orçamento": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "Insight orçamento"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Insight": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "filmes.orçamentos_suspeitos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "filmes",
+			          "ConceptualProperty": "Orçamentos suspeitos"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Orçamentos suspeitos (abaixo de US$ 1.000 ou imputados)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "generos.genero": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "generos",
+			          "ConceptualProperty": "genero"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Gênero": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

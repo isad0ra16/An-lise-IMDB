@@ -1,0 +1,91 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "Fluent2-CY26SU09",
+      "reportVersionAtImport": {
+        "visual": "2.13.0",
+        "report": "3.4.0",
+        "page": "2.3.1"
+      },
+      "type": "SharedResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "Fluent2-CY26SU09",
+          "path": "BaseThemes/Fluent2-CY26SU09.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Painel_Cinematogr_fico_IMDb_em3533207556612413.png",
+          "path": "Painel_Cinematogr_fico_IMDb_em3533207556612413.png",
+          "type": "Image"
+        },
+        {
+          "name": "Painel_Cinematogr_fico_IMDb_em887166986020104.png",
+          "path": "Painel_Cinematogr_fico_IMDb_em887166986020104.png",
+          "type": "Image"
+        },
+        {
+          "name": "Painel_Dashboard_Cinematogr_fi11449034097384458.png",
+          "path": "Painel_Dashboard_Cinematogr_fi11449034097384458.png",
+          "type": "Image"
+        },
+        {
+          "name": "Template_Cinem_tico_Dourado_co6602403139874959.png",
+          "path": "Template_Cinem_tico_Dourado_co6602403139874959.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true,
+    "customMemoryLimit": "1048576",
+    "customTimeoutLimit": "225"
+  }
+}

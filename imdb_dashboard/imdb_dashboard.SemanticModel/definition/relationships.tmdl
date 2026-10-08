@@ -1,0 +1,10 @@
+relationship eced8411-2993-40dd-9a3c-9bc8f1c802ac
+	crossFilteringBehavior: bothDirections
+	fromColumn: generos.id
+	toColumn: filmes.id
+
+relationship 406d6e81-9ce2-4bff-953d-1f747022754b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: filmes.data_lancamento
+	toColumn: LocalDateTable_1d98fe7a-4bf0-495f-83fa-a2c2c085a108.Date
+

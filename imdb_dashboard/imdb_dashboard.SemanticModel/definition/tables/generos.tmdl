@@ -1,0 +1,28 @@
+table generos
+	lineageTag: 6a6c32f3-22e1-40eb-ac53-96af423a4b56
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0585e446-5db9-4e73-9d52-bcc5acf84b55
+		summarizeBy: none
+		sourceColumn: id
+
+	column genero
+		dataType: string
+		lineageTag: 59030570-08aa-4593-a94c-5cdef575af49
+		summarizeBy: none
+		sourceColumn: genero
+
+	partition generos = m
+		mode: import
+		source =
+				let
+					Fonte = Table.SelectColumns(fonte_csv, {"id", "genero"}),
+					SemVazio = Table.SelectRows(Fonte, each [genero] <> null and [genero] <> ""),
+					Dividido = Table.ExpandListColumn(Table.TransformColumns(SemVazio, {{"genero", each Text.Split(_, ", "), type list}}), "genero"),
+					Limpo = Table.TransformColumns(Dividido, {{"genero", Text.Trim, type text}}),
+					Tipos = Table.TransformColumnTypes(Limpo, {{"id", Int64.Type}, {"genero", type text}}, "en-US")
+				in
+					Tipos
+
